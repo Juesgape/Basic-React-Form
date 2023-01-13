@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {Form, Label, InputGroup, Input, TextError, IconCheck, TermsContainer, CenteredButtonContainer, Button, SuccessfulMessage, ErrorMessage} from './elements/forms.js'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCircleXmark, faCircleCheck, faExclamationTriangle} from '@fortawesome/free-solid-svg-icons'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App = () => {
+  return (  
+    <main>
+      <Form action="">
+
+        <div>
+          <Label htmlFor='user'>User</Label>
+          <InputGroup>
+            <Input type='text' placeholder='User' id="user"></Input>
+            <IconCheck icon={faCircleCheck}></IconCheck>
+          </InputGroup>
+          <TextError>Blah blah blah user</TextError>
+        </div>
+
+        <TermsContainer>
+          <Label>
+            <input type='checkbox' name='terms' id='terms'></input>
+            Accept Terms and Conditions
+          </Label>
+        </TermsContainer>
+
+        <ErrorMessage>
+          <p>
+            <FontAwesomeIcon icon={faExclamationTriangle}></FontAwesomeIcon>
+            <b>Error:</b>
+            Please fill out the form correctly
+          </p>
+        </ErrorMessage>
+
+        <CenteredButtonContainer>
+          <Button type="submit">Send</Button>
+          <SuccessfulMessage>The form was saved sucessfully!</SuccessfulMessage>
+        </CenteredButtonContainer>
+
+      </Form>
+    </main>
   );
 }
 
