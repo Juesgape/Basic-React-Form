@@ -51,6 +51,7 @@ const TextError = styled.p`
     font-size: 12px;
     padding-top: 10px;
     color: ${colors.error};
+    display: none;
 `;
 
 const IconCheck = styled(FontAwesomeIcon)`
@@ -59,6 +60,7 @@ const IconCheck = styled(FontAwesomeIcon)`
     bottom: 14px;
     z-index: 100;
     font-size: 16px;
+    display: none;
 `;
 
 const TermsContainer = styled.div`
@@ -113,6 +115,7 @@ const ErrorMessage = styled.div`
 const SuccessfulMessage = styled.p`
     font-size: 14px;
     color: ${colors.correct};
+    display: none;
 `;
 
 export {
