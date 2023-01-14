@@ -1,21 +1,33 @@
 import React from "react";
-import {Form, Label, InputGroup, Input, TextError, IconCheck, TermsContainer, CenteredButtonContainer, Button, SuccessfulMessage, ErrorMessage} from './elements/forms.js'
+import {Form, Label, TermsContainer, CenteredButtonContainer, Button, SuccessfulMessage, ErrorMessage} from './elements/forms.js'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCircleXmark, faCircleCheck, faExclamationTriangle} from '@fortawesome/free-solid-svg-icons'
+
+import InputComponent from './components/input'
 
 const App = () => {
   return (  
     <main>
       <Form action="">
 
-        <div>
-          <Label htmlFor='user'>User</Label>
-          <InputGroup>
-            <Input type='text' placeholder='User' id="user"></Input>
-            <IconCheck icon={faCircleCheck}></IconCheck>
-          </InputGroup>
-          <TextError>Blah blah blah user</TextError>
-        </div>
+        <InputComponent
+          type='text'
+          label='User'
+          placeholder='Jhon123'
+          name='User'
+          errorMessage='The user must be max 16 digits long and it can only contain numbers, letters and underscore'
+          validation=''
+        />
+
+        <InputComponent
+          type='password'
+          label='Password'
+          placeholder='Enter your password'
+          name='password'
+          errorMessage='The user must be max 16 digits long and it can only contain numbers, letters and underscore'
+          validation=''
+        />
+        
 
         <TermsContainer>
           <Label>
@@ -24,13 +36,13 @@ const App = () => {
           </Label>
         </TermsContainer>
 
-        <ErrorMessage>
+        {false && <ErrorMessage>
           <p>
             <FontAwesomeIcon icon={faExclamationTriangle}></FontAwesomeIcon>
             <b>Error:</b>
             Please fill out the form correctly
           </p>
-        </ErrorMessage>
+        </ErrorMessage>}
 
         <CenteredButtonContainer>
           <Button type="submit">Send</Button>
