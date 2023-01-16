@@ -1,16 +1,43 @@
 import React from "react";
 import {Input, Label, InputGroup, TextError, IconCheck} from './../elements/forms'
-import {faCircleCheck} from '@fortawesome/free-solid-svg-icons'
+import {faCircleCheck, faCircleXmark} from '@fortawesome/free-solid-svg-icons'
 
-const InputComponent = ({type, label, placeholder, name, errorMessage, validation}) => {
+const InputComponent = ({state, changeState, type, label, placeholder, name, errorMessage, validation, regularExpression}) => {
+    const onChange = (e) => {
+        changeState({...state, space: e.target.value})
+    }
+
+    const isValid = () => {
+        if(regularExpression) {
+            if(regularExpression.test(state.space)) {
+                changeState({...state, valid: 'true'})
+            } else {
+                changeState({...state, valid: 'false'})
+            }
+        }
+    }
+    
     return(
         <div>
-            <Label htmlFor={name}>{label}</Label>
+            <Label htmlFor={name} valid={state.valid}>{label}</Label>
             <InputGroup>
-                <Input type='text' placeholder={placeholder} id={name}></Input>
-                <IconCheck icon={faCircleCheck}></IconCheck>
+                <Input valid={state.valid}
+                    type={type}
+                    placeholder={placeholder}
+                    id={name}
+                    value={state.space}
+                    onChange={onChange}
+                    regularExpression={regularExpression}
+                    onKeyUp={isValid}
+                    onBlur={isValid}
+                    validation={state.valid}
+                    >
+                    
+                </Input>
+                <IconCheck 
+                    icon={state.valid === 'true' ? faCircleCheck : faCircleXmark} valid={state.valid}></IconCheck>
             </InputGroup>
-            <TextError>{errorMessage}</TextError>
+            <TextError valid={state.valid}>{errorMessage}</TextError>
         </div>
     );
 }

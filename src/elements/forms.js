@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const colors = {
@@ -23,6 +23,10 @@ const Label = styled.label`
     padding: 10px;
     min-height: 40px;
     cursor: pointer;
+
+    ${props => props.valid === 'false' && css`
+        color: ${colors.error};
+    `}
 `;
 
 const InputGroup = styled.div`
@@ -45,6 +49,14 @@ const Input = styled.input`
         outline: none;
         box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
     }
+
+    /* ${props => props.valid === 'true' && css`
+        border: 3px solid ${colors.correct} !important;
+    `} */
+
+    ${props => props.valid === 'false' && css`
+        border: 3px solid ${colors.error} !important;
+    `}
 `;
 
 const TextError = styled.p`
@@ -52,6 +64,14 @@ const TextError = styled.p`
     padding-top: 10px;
     color: ${colors.error};
     display: none;
+
+    ${props => props.valid === 'true' && css`
+        display: none;
+    `}
+
+    ${props => props.valid === 'false' && css`
+        display: block;
+    `}
 `;
 
 const IconCheck = styled(FontAwesomeIcon)`
@@ -60,7 +80,19 @@ const IconCheck = styled(FontAwesomeIcon)`
     bottom: 14px;
     z-index: 100;
     font-size: 16px;
-    display: none;
+    opacity: 0;
+
+    ${props => props.valid === 'false' && css`
+        opacity: 1;
+        color: ${colors.error};
+    `}
+
+    ${props => props.valid === 'true' && css`
+        opacity: 1;
+        color: ${colors.correct};
+    `}
+
+    
 `;
 
 const TermsContainer = styled.div`
