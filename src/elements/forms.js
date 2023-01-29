@@ -101,6 +101,10 @@ const TermsContainer = styled.div`
     input {
         margin-right: 10px;
     }
+
+    @media (max-width: 800px){
+        grid-column: span 1;
+    }
 `;
 
 const CenteredButtonContainer = styled.div`
@@ -109,6 +113,10 @@ const CenteredButtonContainer = styled.div`
     align-items: center;
     grid-column: span 2;
     gap: 20px;
+
+    @media (max-width: 800px){
+        grid-column: span 1;
+    }
 `;
 
 const Button = styled.button`
@@ -141,6 +149,11 @@ const ErrorMessage = styled.div`
     }
     b {
         padding-left: 10px;
+    }
+
+    @media (max-width: 800px){
+        grid-column: span 1;
+        font-size: 0.7rem;
     }
 `;
 
