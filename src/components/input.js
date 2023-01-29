@@ -2,7 +2,7 @@ import React from "react";
 import {Input, Label, InputGroup, TextError, IconCheck} from './../elements/forms'
 import {faCircleCheck, faCircleXmark} from '@fortawesome/free-solid-svg-icons'
 
-const InputComponent = ({state, changeState, type, label, placeholder, name, errorMessage, validation, regularExpression}) => {
+const InputComponent = ({state, changeState, type, label, placeholder, name, errorMessage, validation, regularExpression, functionPassword}) => {
     const onChange = (e) => {
         changeState({...state, space: e.target.value})
     }
@@ -14,6 +14,9 @@ const InputComponent = ({state, changeState, type, label, placeholder, name, err
             } else {
                 changeState({...state, valid: 'false'})
             }
+        }
+        if(functionPassword) {
+            functionPassword()
         }
     }
     

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Form, Label, TermsContainer, CenteredButtonContainer, Button, SuccessfulMessage, ErrorMessage} from './elements/forms.js'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCircleXmark, faCircleCheck, faExclamationTriangle} from '@fortawesome/free-solid-svg-icons'
+import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons'
 
 import InputComponent from './components/input'
 
@@ -21,6 +21,20 @@ const App = () => {
     cellphone: /^\d{7,14}$/ 
   }
 
+  const confirmPassword2 = () => {
+    if(password.space.length > 0) {
+      if(password.space !== password2.space) {
+        changePassword2((prevState) => {
+          return {...prevState, valid: 'false'}
+        })
+      } else {
+        changePassword2((prevState) => {
+          return {...prevState, valid: 'true'}
+        })
+      }
+    }
+  }
+
   return (  
     <main>
       <Form action="">
@@ -33,8 +47,42 @@ const App = () => {
           placeholder='Jhon123'
           name='User'
           errorMessage='The user must be max 16 digits long and it can only contain numbers, letters and underscore'
-          validation=''
           regularExpression={expressions.user}
+        />
+
+
+        <InputComponent
+          state = {name}
+          changeState = {changeName}
+          type='text'
+          label='Name'
+          placeholder='Juanito Alcachofas'
+          name='name'
+          errorMessage='Incorrect name'
+          regularExpression={expressions.name}
+        />
+
+
+        <InputComponent
+          state = {mail}
+          changeState = {changeMail}
+          type='email'
+          label='Mail'
+          placeholder='Mail@email.com'
+          name='mail'
+          errorMessage='Incorrect E-mail direction'
+          regularExpression={expressions.mail}
+        />
+
+        <InputComponent
+          state = {cell}
+          changeState = {changeCell}
+          type='text'
+          label='Cell'
+          placeholder='4967890911'
+          name='cell'
+          errorMessage='Incorrect cellphone number'
+          regularExpression={expressions.cellphone}
         />
 
         <InputComponent
@@ -45,8 +93,18 @@ const App = () => {
           placeholder='Enter your password'
           name='password'
           errorMessage='The user must be max 16 digits long and it can only contain numbers, letters and underscore'
-          validation=''
           regularExpression={expressions.password}
+        />
+
+        <InputComponent
+          state = {password2}
+          changeState = {changePassword2}
+          type='password'
+          label='Confirm Password'
+          placeholder='Confirm password'
+          name='password2'
+          errorMessage="Password doesn't match"
+          functionPassword={confirmPassword2}
         />
         
 
