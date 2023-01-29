@@ -12,9 +12,11 @@ const App = () => {
   const [password2, changePassword2] = useState({space: '', valid: null});
   const [mail, changeMail] = useState({space: '', valid: null});
   const [cell, changeCell] = useState({space: '', valid: null});
+  const [terms, changeTerms] = useState(false);
+  const [validForm, changeValidForm] = useState(null)
 
   const expressions = {
-    user: /^[a-zA-Z0-9\_\-]{4,16}$/,
+    user: /^[a-zA-Z0-9_-]{4,16}$/,
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
     password: /^.{4,12}$/,
     mail: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -35,9 +37,40 @@ const App = () => {
     }
   }
 
+  const onChangeTerms = (e) => {
+    changeTerms(e.target.checked)
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if(
+      user.valid === 'true' && 
+      name.valid === 'true' &&
+      password.valid === 'true' &&
+      password2.valid === 'true' && 
+      mail.valid === 'true' &&
+      cell.valid === 'true' &&
+      terms
+      ) {
+
+        changeValidForm(true)
+        changeUser({space: '', valid:null})
+        changeName({space: '', valid:null})
+        changePassword({space: '', valid:null})
+        changePassword2({space: '', valid:null})
+        changeMail({space: '', valid:null})
+        changeCell({space: '', valid:null})
+
+      } else {
+        changeValidForm(false)
+      }
+
+  }
+
   return (  
     <main>
-      <Form action="">
+      <Form action="" onSubmit={onSubmit}>
 
         <InputComponent
           state = {user}
@@ -110,12 +143,20 @@ const App = () => {
 
         <TermsContainer>
           <Label>
-            <input type='checkbox' name='terms' id='terms'></input>
+            <input 
+              type='checkbox' 
+              name='terms' 
+              id='terms' 
+              checked={terms}
+              onChange={onChangeTerms}
+            >
+
+            </input>
             Accept Terms and Conditions
           </Label>
         </TermsContainer>
 
-        {false && <ErrorMessage>
+        {validForm === false && <ErrorMessage>
           <p>
             <FontAwesomeIcon icon={faExclamationTriangle}></FontAwesomeIcon>
             <b>Error:</b>
@@ -125,7 +166,10 @@ const App = () => {
 
         <CenteredButtonContainer>
           <Button type="submit">Send</Button>
-          <SuccessfulMessage>The form was saved sucessfully!</SuccessfulMessage>
+          {validForm === true && <SuccessfulMessage>
+            The form was saved sucessfully!
+            
+            </SuccessfulMessage>}
         </CenteredButtonContainer>
 
       </Form>

@@ -147,7 +147,6 @@ const ErrorMessage = styled.div`
 const SuccessfulMessage = styled.p`
     font-size: 14px;
     color: ${colors.correct};
-    display: none;
 `;
 
 export {
